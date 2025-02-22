@@ -1,80 +1,37 @@
-import { mistral } from "@ai-sdk/mistral";
-import { convertToCoreMessages, streamText, Message } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { convertToCoreMessages, streamText } from "ai";
 import { Pica } from "@picahq/ai";
 
-// Validate Mistral API key
-const validateMistralApiKey = () => {
-  const apiKey = process.env.MISTRAL_API_KEY;
-  if (!apiKey) {
-    throw new Error('MISTRAL_API_KEY is not set in environment variables');
-  }
-  return apiKey;
-};
-
-// Initialize Pica with tools
-const initializePica = () => {
-  const picaKey = process.env.PICA_SECRET_KEY;
-  if (!picaKey) {
-    throw new Error('PICA_SECRET_KEY is not set in environment variables');
-  }
-  
-  const pica = new Pica(picaKey);
-  return pica;
-};
-
 export async function POST(request: Request) {
-  try {
-    // Validate API keys first
-    validateMistralApiKey();
-    
-    const { messages }: { messages: Message[] } = await request.json();
-    console.log("Received messages:", messages);
+  const { messages } = await request.json();
 
-    // Initialize Pica with tools
-    const pica = initializePica();
-    
-    // Generate system prompt with tool information
-    const system = await pica.generateSystemPrompt();
-    console.log("Generated system prompt with tools");
+  const pica = new Pica(process.env.PICA_SECRET_KEY as string);
 
-    // Create stream using Mistral through AI SDK
-    console.log("Creating Mistral stream with tools...");
-    const stream = streamText({
-      model: mistral("mistral-large-latest"),
-      system,
-      tools: {
-        ...pica.oneTool,
-      },
-      messages: convertToCoreMessages(messages),
-      maxSteps: 20,
-      temperature: 0.7, // Add some creativity while keeping responses focused
-    });
+  // Predefined system prompt for autonomous decision-making
+  const systemPrompt = `
+    You are an intelligent AI assistant with access to Pica, a powerful tool for generating system-level insights.
+    Your goal is to autonomously analyze user queries, determine the best approach to respond, and utilize Pica's capabilities when necessary.
 
-    console.log("Stream created, sending response...");
-    const response = (await stream).toDataStreamResponse();
-    console.log("Response sent successfully");
-    return response;
+    Follow these principles:
+    1. **Autonomy** – Make decisions based on the conversation context without relying on explicit user instructions.
+    2. **Efficiency** – Minimize unnecessary API calls while ensuring the best possible response.
+    3. **Context Awareness** – Maintain context from previous interactions to provide coherent and relevant responses.
+    4. **Tool Utilization** – Use Pica when it enhances your response, such as generating structured outputs, summaries, or system-level insights.
+    5. **Clarity & Accuracy** – Ensure responses are clear, accurate, and actionable.
 
-  } catch (error: unknown) {
-    console.error("Error in chat route:", {
-      error,
-      message: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined,
-      type: error instanceof Error ? error.constructor.name : typeof error
-    });
+    When engaging with users:
+    - If the request requires structured insights or deeper context understanding, use Pica to generate a system-level response before proceeding.
+    - If direct AI responses suffice, process them independently.
+    - Prioritize user intent and adapt dynamically to the conversation flow.
+  `;
 
-    return new Response(
-      JSON.stringify({ 
-        error: error instanceof Error ? error.message : 'An unknown error occurred',
-        details: error instanceof Error ? error.stack : undefined,
-        type: 'chat_error'
-      }), 
-      {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-  }
+  const stream = streamText({
+    model: openai("gpt-4o"),
+    system: systemPrompt,
+    tools: { ...pica.oneTool },
+    messages: convertToCoreMessages(messages),
+    maxSteps: 10,
+  });
+
+  return (await stream).toDataStreamResponse();
 }
