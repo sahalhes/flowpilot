@@ -4,7 +4,7 @@ import { Pica } from "@picahq/ai";
 
 // Validate OpenAI API key
 const validateOpenAiApiKey = () => {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.AZURE_API_KEY;
   if (!apiKey) {
     throw new Error('OPENAI_API_KEY is not set in environment variables');
   }
