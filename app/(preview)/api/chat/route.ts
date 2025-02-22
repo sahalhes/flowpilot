@@ -8,60 +8,66 @@ const validateMistralApiKey = () => {
   if (!apiKey) {
     throw new Error('MISTRAL_API_KEY is not set in environment variables');
   }
-  // Log first few characters of API key for debugging (safe to show prefix)
-  console.log('API Key prefix:', apiKey.substring(0, 4));
-  if (!apiKey.startsWith('DxI')) {
-    throw new Error('Invalid MISTRAL_API_KEY format - should start with DxI');
-  }
   return apiKey;
+};
+
+// Initialize Pica with tools
+const initializePica = () => {
+  const picaKey = process.env.PICA_SECRET_KEY;
+  if (!picaKey) {
+    throw new Error('PICA_SECRET_KEY is not set in environment variables');
+  }
+  
+  const pica = new Pica(picaKey);
+  return pica;
 };
 
 export async function POST(request: Request) {
   try {
-    // Log environment variables availability (without exposing values)
-    console.log('Environment variables check:', {
-      hasMistralKey: !!process.env.MISTRAL_API_KEY,
-      hasPicaKey: !!process.env.PICA_SECRET_KEY
-    });
-
-    // Validate API key first
+    // Validate API keys first
     validateMistralApiKey();
-
+    
     const { messages }: { messages: Message[] } = await request.json();
     console.log("Received messages:", messages);
 
-    const pica = new Pica(process.env.PICA_SECRET_KEY as string);
+    // Initialize Pica with tools
+    const pica = initializePica();
+    
+    // Generate system prompt with tool information
     const system = await pica.generateSystemPrompt();
-    console.log("Generated system prompt");
+    console.log("Generated system prompt with tools");
 
     // Create stream using Mistral through AI SDK
-    console.log("Creating Mistral stream...");
+    console.log("Creating Mistral stream with tools...");
     const stream = streamText({
-      model: mistral("mistral-small"),
+      model: mistral("mistral-large-latest"),
       system,
       tools: {
         ...pica.oneTool,
       },
       messages: convertToCoreMessages(messages),
       maxSteps: 20,
+      temperature: 0.7, // Add some creativity while keeping responses focused
     });
 
     console.log("Stream created, sending response...");
     const response = (await stream).toDataStreamResponse();
-    console.log("Response sent");
+    console.log("Response sent successfully");
     return response;
 
   } catch (error: unknown) {
-    console.error("Detailed error in chat route:", {
+    console.error("Error in chat route:", {
       error,
       message: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined
+      stack: error instanceof Error ? error.stack : undefined,
+      type: error instanceof Error ? error.constructor.name : typeof error
     });
 
     return new Response(
       JSON.stringify({ 
         error: error instanceof Error ? error.message : 'An unknown error occurred',
-        details: error instanceof Error ? error.stack : undefined
+        details: error instanceof Error ? error.stack : undefined,
+        type: 'chat_error'
       }), 
       {
         status: 500,
