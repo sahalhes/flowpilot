@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/mistral": "^1.1.12",
     "@ai-sdk/openai": "^1.1.13",
     "@ai-sdk/react": "^1.1.16",
+    "@mistralai/mistralai": "^1.5.0",
     "@nextui-org/react": "^2.6.11",
     "@picahq/ai": "^2.0.6",
     "@picahq/authkit": "^1.0.0",
