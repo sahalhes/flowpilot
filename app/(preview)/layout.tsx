@@ -27,7 +27,7 @@ export default function RootLayout({
           <div className="max-w-[1200px] w-full mx-auto px-8">
             <Toaster position="top-center" richColors />
             {children}
-          </div>
+          </div>       
         </div>
       </body>
     </html>

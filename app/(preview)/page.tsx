@@ -63,6 +63,7 @@ export default function Home() {
           append={append}
         />
       </div>
+      <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai><script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
     </div>
   );
 }
