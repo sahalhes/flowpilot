@@ -1,15 +1,22 @@
-"use client";
+"use client"
 
-import { useRef, useEffect, useState } from "react";
-import { useChat } from "@ai-sdk/react";
-import { useAuthKit } from "@picahq/authkit";
-import { Header } from "./components/Header";
-import { ChatMessages } from "./components/ChatMessages";
-import { ChatInput } from "./components/ChatInput";
-import "@n8n/chat/style.css";
-import { createChat } from "@n8n/chat";
+import type React from "react"
+
+import { useRef, useEffect, useState } from "react"
+import { useChat } from "@ai-sdk/react"
+import { useAuthKit } from "@picahq/authkit"
+import { Header } from "./components/Header"
+import { ChatMessages } from "./components/ChatMessages"
+import { ChatInput } from "./components/ChatInput"
+import { ModeToggle } from "./components/mode-toggle"
+import { WorkflowInput } from "./components/workflow-input"
+import "@n8n/chat/style.css"
+import { createChat } from "@n8n/chat"
 
 export default function Home() {
+  const [mode, setMode] = useState<"execute" | "workflow">("execute")
+  const [workflowUrl, setWorkflowUrl] = useState("")
+
   const { open } = useAuthKit({
     token: {
       url: "http://localhost:3000/api/authkit",
@@ -19,59 +26,60 @@ export default function Home() {
     onSuccess: (connection) => {},
     onError: (error) => {},
     onClose: () => {},
-  });
+  })
 
-  const {
-    messages,
-    handleSubmit,
-    input,
-    handleInputChange,
-    append,
-    isLoading,
-    stop,
-    status,
-  } = useChat({
+  const { messages, handleSubmit, input, handleInputChange, append, isLoading, stop, status } = useChat({
     maxSteps: 20,
-  });
+  })
 
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    inputRef.current?.focus()
+  }, [])
 
   useEffect(() => {
     if (!isLoading) {
-      inputRef.current?.focus();
+      inputRef.current?.focus()
     }
-  }, [isLoading]);
+  }, [isLoading])
 
-  useEffect(() => {
-    createChat({
-      webhookUrl: process.env.NEXT_PUBLIC_WORFLOW
-    });
-  }, []);
-  
+  const handleWorkflowSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (workflowUrl) {
+      createChat({
+        webhookUrl: workflowUrl,
+      })
+    }
+  }
 
   return (
     <div className="flex flex-col justify-between h-dvh">
       <div className="flex flex-col h-full">
         <Header />
-        <ChatMessages messages={messages} isLoading={isLoading} />
-        <ChatInput
-          inputRef={inputRef}
-          input={input}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          isLoading={isLoading}
-          status={status}
-          stop={stop}
-          messages={messages}
-          append={append}
-        />
+        <ModeToggle mode={mode} setMode={setMode} />
+        {mode === "execute" ? (
+          <>
+            <ChatMessages messages={messages} isLoading={isLoading} />
+            <ChatInput
+              inputRef={inputRef}
+              input={input}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isLoading={isLoading}
+              status={status}
+              stop={stop}
+              messages={messages}
+              append={append}
+            />
+          </>
+        ) : (
+          <WorkflowInput workflowUrl={workflowUrl} setWorkflowUrl={setWorkflowUrl} onSubmit={handleWorkflowSubmit} />
+        )}
       </div>
       <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai>
       <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
     </div>
-  );
+  )
 }
+
