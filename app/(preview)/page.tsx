@@ -10,8 +10,6 @@ import { ChatMessages } from "./components/ChatMessages"
 import { ChatInput } from "./components/ChatInput"
 import { ModeToggle } from "./components/mode-toggle"
 import { WorkflowChat } from "./components/workflow-input"
-import "@n8n/chat/style.css"
-import { createChat } from "@n8n/chat"
 
 export default function Home() {
   const [mode, setMode] = useState<"execute" | "workflow">("execute")
@@ -44,14 +42,6 @@ export default function Home() {
     }
   }, [isLoading])
 
-  const handleWorkflowSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (workflowUrl) {
-      createChat({
-        webhookUrl: workflowUrl,
-      })
-    }
-  }
 
   return (
     <div className="flex flex-col justify-between h-dvh">
@@ -74,7 +64,7 @@ export default function Home() {
             />
           </>
         ) : (
-          <WorkflowChat workflowUrl={workflowUrl} setWorkflowUrl={setWorkflowUrl} onSubmit={handleWorkflowSubmit} />
+          <WorkflowChat workflowUrl={workflowUrl} setWorkflowUrl={setWorkflowUrl} />
         )}
       </div>
       <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai>
