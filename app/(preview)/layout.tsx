@@ -4,8 +4,8 @@ import { Toaster } from "sonner";
 import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ai-sdk-preview-roundtrips.vercel.app"),
-  title: "Pica OneTool Demo",
+  metadataBase: new URL("https://github.com/sahalhes/flowpilot"),
+  title: "FlowPilot",
   description: "Unleash the Potential of Agentic AI",
   icons: {
     icon: [
