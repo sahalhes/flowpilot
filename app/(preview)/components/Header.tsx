@@ -6,7 +6,7 @@ export function Header() {
     <header className="w-full py-4 px-6 bg-black">
       <div className="flex items-center justify-between max-w-3xl mx-auto">
         <a href="/" className="hover:opacity-80 transition-opacity">
-          <Image src="/logo-white.svg" alt="Logo" width={100} height={30} />
+          <Image src="/logo-white.svg" alt="Logo" width={100} height={100} />
         </a>
         <a
             href="https://github.com/sahalhes/flowpilot"
