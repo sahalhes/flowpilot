@@ -66,8 +66,7 @@ export default function Home() {
           <ChatInterface />
         )}
       </div>
-      <elevenlabs-convai agent-id={process.env.NEXT_PUBLIC_AGENT_ID}></elevenlabs-convai>
-      <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+      <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai><script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
     </div>
   );
 }
