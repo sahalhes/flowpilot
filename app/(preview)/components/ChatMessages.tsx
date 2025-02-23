@@ -24,13 +24,13 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
   return (
     <div
       ref={containerRef}
-      className="flex-1 flex flex-col gap-6 w-full md:w-[800px] items-center overflow-y-auto  mx-auto md:px-0 custom-scrollbar h-[calc(100vh-300px)]"
+      className="flex-1 flex flex-col gap-6 w-full md:w-[800px] items-center overflow-y-auto mx-auto md:px-0 custom-scrollbar h-[calc(100vh-300px)]"
     >
       {messages.length === 0 && (
         <motion.div className="h-[350px] px-4 w-full md:w-[800px] md:px-0 pt-20">
           <div className="flex flex-col items-center justify-center gap-6 text-center">
             <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-              Pica OneTool Demo
+              FlowPilot
             </h1>
             <div className="flex flex-col gap-3 max-w-[600px] mx-auto">
               <p className="text-lg text-gray-400">

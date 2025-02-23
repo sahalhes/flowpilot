@@ -53,12 +53,12 @@ export function ChatInput({
                     content: suggestedAction.action,
                   });
                 }}
-                className="w-full text-left bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all duration-200 flex flex-col gap-2"
+                className="w-full text-left bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-xl p-4 transition-all duration-200 flex flex-col gap-2"
               >
-                <span className="font-medium text-white/90">
+                <span className="font-medium text-white">
                   {suggestedAction.title}
                 </span>
-                <span className="text-white/60 text-sm">
+                <span className="text-gray-400 text-sm">
                   {suggestedAction.label}
                 </span>
               </button>
@@ -74,8 +74,8 @@ export function ChatInput({
           <textarea
             ref={inputRef}
             rows={3}
-            className="w-full resize-none rounded-xl bg-white/5 px-4 py-3 text-base text-white placeholder:text-gray-400 border border-white/10 focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none transition-all duration-200"
-            placeholder={isLoading ? "Waiting for response..." : "Message Pica..."}
+            className="w-full resize-none rounded-xl bg-gray-800 px-4 py-3 text-base text-white placeholder-gray-500 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200"
+            placeholder={isLoading ? "Waiting for response..." : "Message Flow Pilot..."}
             value={input}
             onChange={handleInputChange}
             onKeyDown={(e) => {
@@ -91,7 +91,7 @@ export function ChatInput({
               type="button"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-emerald-500 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-200 text-sm"
+              className="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-gray-700 border border-gray-600 text-gray-400 hover:text-blue-500 hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-200 text-sm"
               onClick={stop}
             >
               Stop
@@ -105,7 +105,7 @@ export function ChatInput({
               type="button"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-emerald-500 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-200 text-sm"
+              className="px-4 py-2 rounded-lg bg-gray-800 border border-gray-600 text-gray-400 hover:text-blue-500 hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-200 text-sm"
               onClick={() => window.location.reload()}
             >
               Clear chat
