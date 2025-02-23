@@ -3,7 +3,7 @@ import { ChatInput } from "./ChatInput";
 import { ChatMessages } from "./ChatMessages";
 
 export default function WorkflowChat() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<{ id: string; role: "user" | "assistant" | "data" | "system"; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -33,7 +33,7 @@ export default function WorkflowChat() {
     }
     
     // Add user message to chat
-    const userMessage = {
+    const userMessage: { id: string; role: "user" | "assistant" | "data" | "system"; content: string } = {
       id: Date.now().toString(),
       role: "user",
       content: input,
@@ -55,7 +55,7 @@ export default function WorkflowChat() {
       }
 
       const data = await res.json();
-      const assistantMessage = {
+      const assistantMessage: { id: string; role: "user" | "assistant" | "data" | "system"; content: string } = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content: data.length > 0 && data[0].output ? data[0].output : "No valid response received."
@@ -64,10 +64,10 @@ export default function WorkflowChat() {
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error in workflow request:", error);
-      const errorMessage = {
+      const errorMessage: { id: string; role: "user" | "assistant" | "data" | "system"; content: string } = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: `Error connecting to workflow: ${error.message}`
+        content: `Error connecting to workflow: ${(error as Error).message}`
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
