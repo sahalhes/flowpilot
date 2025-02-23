@@ -28,12 +28,12 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
     >
       {messages.length === 0 && (
         <motion.div 
-          className="h-[350px] px-4 w-full md:w-[800px] md:px-0 pt-20"
+          className="h-[250px] px-4 w-full md:w-[800px] md:px-0 pt-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex flex-col items-center justify-center gap-8 text-center">
+          <div className="flex flex-col items-center justify-center gap-6 text-center">
             <motion.div
               initial={{ scale: 0.95 }}
               animate={{ scale: 1 }}

@@ -35,8 +35,8 @@ export function ChatInput({
   };
 
   return (
-    <div className="mt-auto w-full max-w-3xl mx-auto pb-6">
-      <div className="grid sm:grid-cols-2 gap-3 w-full px-4 md:px-0 mb-6">
+    <div className="mt-auto w-full max-w-3xl mx-auto pb-4">
+      <div className="grid sm:grid-cols-2 gap-2 w-full px-4 md:px-0 mb-4">
         {messages.length === 0 &&
           suggestedActions.map((suggestedAction, index) => (
             <motion.div
@@ -53,12 +53,12 @@ export function ChatInput({
                     content: suggestedAction.action,
                   });
                 }}
-                className="w-full text-left bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-xl p-4 transition-all duration-200 flex flex-col gap-2"
+                className="w-full text-left bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg p-3 transition-all duration-200 flex flex-col gap-1"
               >
-                <span className="font-medium text-white">
+                <span className="font-medium text-white text-sm">
                   {suggestedAction.title}
                 </span>
-                <span className="text-gray-400 text-sm">
+                <span className="text-gray-400 text-xs">
                   {suggestedAction.label}
                 </span>
               </button>
@@ -67,14 +67,14 @@ export function ChatInput({
       </div>
       
       <form
-        className="flex flex-col gap-3 items-center px-4 md:px-0"
+        className="flex flex-col gap-2 items-center px-4 md:px-0"
         onSubmit={wrappedHandleSubmit}
       >
         <div className="relative flex items-center w-full">
           <textarea
             ref={inputRef}
-            rows={3}
-            className="w-full resize-none rounded-xl bg-gray-800 px-4 py-3 text-base text-white placeholder-gray-500 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200"
+            rows={2}
+            className="w-full resize-none rounded-lg bg-gray-800 px-3 py-2 text-sm text-white placeholder-gray-500 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200"
             placeholder={isLoading ? "Waiting for response..." : "Message Flow Pilot..."}
             value={input}
             onChange={handleInputChange}

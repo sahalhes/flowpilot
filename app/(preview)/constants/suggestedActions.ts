@@ -1,22 +1,22 @@
 export const suggestedActions = [
     {
-      title: "List Available Connections",
-      label: "Show me my connections",
+      title: "List Connections",
+      label: "View available connections",
       action: "List all my available connections",
     },
     {
-      title: "List Supported Actions for Gmail",
-      label: "What actions are supported for gmail?",
+      title: "Gmail Actions",
+      label: "Show Gmail capabilities",
       action: "What actions are supported for gmail messages?",
     },
     {
-      title: "Schedule a meeting",
-      label: "Schedule a meeting for me in google calendar",
+      title: "Schedule Meeting",
+      label: "Create calendar event",
       action: "Schedule a google calendar meeting for me",
     },
     {
-      title: "Search using Exa AI",
-      label: "Search for Lionel Messi using Exa AI",
+      title: "Search with Exa",
+      label: "AI-powered search",
       action: "Search for Lionel Messi using Exa AI",
     },
   ];
