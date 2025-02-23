@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     const allMessages = [prePromptMessage, ...messages];
     
     const stream = streamText({
-      model: openai("gpt-4o"),
+      model: openai("gpt-4o") as any,
       system,
       tools: { ...pica.oneTool },
       messages: convertToCoreMessages(allMessages),
