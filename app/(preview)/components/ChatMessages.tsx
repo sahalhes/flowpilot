@@ -27,20 +27,38 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
       className="flex-1 flex flex-col gap-6 w-full md:w-[800px] items-center overflow-y-auto mx-auto md:px-0 custom-scrollbar h-[calc(100vh-300px)]"
     >
       {messages.length === 0 && (
-        <motion.div className="h-[350px] px-4 w-full md:w-[800px] md:px-0 pt-20">
-          <div className="flex flex-col items-center justify-center gap-6 text-center">
-            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-              FlowPilot
-            </h1>
-            <div className="flex flex-col gap-3 max-w-[600px] mx-auto">
-              <p className="text-lg text-gray-400">
-                Connect your AI agents to 100+ APIs and tools with a single line
-                of code.
+        <motion.div 
+          className="h-[350px] px-4 w-full md:w-[800px] md:px-0 pt-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="flex flex-col items-center justify-center gap-8 text-center">
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative"
+            >
+              <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+                FlowPilot
+              </h1>
+              <div className="absolute -inset-1 blur-xl bg-gradient-to-r from-blue-400/20 via-purple-500/20 to-pink-500/20 -z-10" />
+            </motion.div>
+            
+            <motion.div 
+              className="flex flex-col gap-6 max-w-[600px] mx-auto"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <p className="text-1xl font-medium bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
+                Use your PICA connections as well as your custom agentic workflow easily
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-base text-gray-400 leading-relaxed">
                 Build powerful integrations and automate workflows instantly.
               </p>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       )}
