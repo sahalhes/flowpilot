@@ -9,7 +9,7 @@ import { Header } from "./components/Header"
 import { ChatMessages } from "./components/ChatMessages"
 import { ChatInput } from "./components/ChatInput"
 import { ModeToggle } from "./components/mode-toggle"
-import { WorkflowInput } from "./components/workflow-input"
+import { WorkflowChat } from "./components/workflow-input"
 import "@n8n/chat/style.css"
 import { createChat } from "@n8n/chat"
 
@@ -74,7 +74,7 @@ export default function Home() {
             />
           </>
         ) : (
-          <WorkflowInput workflowUrl={workflowUrl} setWorkflowUrl={setWorkflowUrl} onSubmit={handleWorkflowSubmit} />
+          <WorkflowChat workflowUrl={workflowUrl} setWorkflowUrl={setWorkflowUrl} onSubmit={handleWorkflowSubmit} />
         )}
       </div>
       <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai>
