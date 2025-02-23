@@ -6,6 +6,8 @@ import { useAuthKit } from "@picahq/authkit";
 import { Header } from "./components/Header";
 import { ChatMessages } from "./components/ChatMessages";
 import { ChatInput } from "./components/ChatInput";
+import "@n8n/chat/style.css";
+import { createChat } from "@n8n/chat";
 
 export default function Home() {
   const { open } = useAuthKit({
@@ -13,7 +15,6 @@ export default function Home() {
       url: "http://localhost:3000/api/authkit",
       headers: {},
     },
-    // appTheme: 'dark',
     selectedConnection: "GitHub",
     onSuccess: (connection) => {},
     onError: (error) => {},
@@ -39,12 +40,18 @@ export default function Home() {
     inputRef.current?.focus();
   }, []);
 
-  // Add new useEffect to focus after loading completes
   useEffect(() => {
     if (!isLoading) {
       inputRef.current?.focus();
     }
   }, [isLoading]);
+
+  useEffect(() => {
+    createChat({
+      webhookUrl: process.env.NEXT_PUBLIC_WORFLOW
+    });
+  }, []);
+  
 
   return (
     <div className="flex flex-col justify-between h-dvh">
@@ -63,7 +70,8 @@ export default function Home() {
           append={append}
         />
       </div>
-      <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai><script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+      <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai>
+      <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
     </div>
   );
 }
