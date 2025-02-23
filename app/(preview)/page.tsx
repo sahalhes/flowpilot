@@ -9,7 +9,7 @@ import { Header } from "./components/Header"
 import { ChatMessages } from "./components/ChatMessages"
 import { ChatInput } from "./components/ChatInput"
 import { ModeToggle } from "./components/mode-toggle"
-import { WorkflowChat } from "./components/workflow-input"
+import ChatInterface  from "./components/workflow-input"
 
 export default function Home() {
   const [mode, setMode] = useState<"execute" | "workflow">("execute")
@@ -64,7 +64,7 @@ export default function Home() {
             />
           </>
         ) : (
-          <WorkflowChat workflowUrl={workflowUrl} setWorkflowUrl={setWorkflowUrl} />
+          <ChatInterface />
         )}
       </div>
       <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai>
