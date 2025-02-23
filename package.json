@@ -13,6 +13,7 @@
     "@ai-sdk/openai": "^1.1.13",
     "@ai-sdk/react": "^1.1.16",
     "@mistralai/mistralai": "^1.5.0",
+    "@n8n/chat": "^0.27.1",
     "@nextui-org/react": "^2.6.11",
     "@picahq/ai": "^2.0.6",
     "@picahq/authkit": "^1.0.0",

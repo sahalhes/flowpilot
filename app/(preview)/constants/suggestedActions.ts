@@ -1,8 +1,8 @@
 export const suggestedActions = [
     {
       title: "List Available Connections",
-      label: "Show me my 5 latest connections",
-      action: "List my 5 latest available connections",
+      label: "Show me my connections",
+      action: "List all my available connections",
     },
     {
       title: "List Supported Actions for Gmail",
@@ -10,13 +10,13 @@ export const suggestedActions = [
       action: "What actions are supported for gmail messages?",
     },
     {
-      title: "Create a Shopify Product",
-      label: "Create a new product in my Shopify store",
-      action: "Create a new product in my Shopify",
+      title: "Schedule a meeting",
+      label: "Schedule a meeting for me in google calendar",
+      action: "Schedule a google calendar meeting for me",
     },
     {
       title: "Search using Exa AI",
-      label: "Search for Paul McCartney using Exa AI",
-      action: "Search for Paul McCartney using Exa AI",
+      label: "Search for Lionel Messi using Exa AI",
+      action: "Search for Lionel Messi using Exa AI",
     },
   ];

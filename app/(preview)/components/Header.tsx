@@ -1,67 +1,64 @@
 import Image from "next/image";
 import { GitHubIcon, HelpIcon, VercelIcon } from "@/components/icons";
 
-
 export function Header() {
   return (
-    <header className="w-full pt-4 px-4 md:px-0 flex-none">
-      <div className="flex items-center justify-center max-w-[800px] mx-auto w-full">
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-3">
-            <a href="https://picaos.com" target="_blank">
-              <Image
-                src="/logo-white.svg"
-                alt="Pica Logo"
-                width={80}
-                height={20}
-              />
-            </a>
-           
-          </div>
+    <header className="w-full py-6 px-4 md:px-0 flex-none">
+      <div className="flex items-center justify-between max-w-3xl mx-auto w-full">
+        <div className="flex items-center gap-4">
+          <a href="https://picaos.com" target="_blank" className="hover:opacity-80 transition-opacity">
+            <Image
+              src="/logo-white.svg"
+              alt="Pica Logo"
+              width={90}
+              height={24}
+              className="h-6 w-auto"
+            />
+          </a>
+        </div>
 
-          <div className="flex items-center gap-2">
-            <a
-              href="https://github.com/picahq/pica"
-              target="_blank"
-              className="flex items-center gap-2 text-gray-400 hover:text-green-500 transition-colors text-xs"
-            >
-              <GitHubIcon size={16} />
-              <span>picahq/pica</span>
-            </a>
-            <div className="h-4 w-px bg-green-800/20" />
-            <a
-              href="https://docs.picaos.com/sdk/vercel-ai"
-              target="_blank"
-              className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors text-xs bg-green-900/20 px-2 py-1 rounded-md border border-green-800 hover:bg-green-900/40"
-            >
-              <HelpIcon size={14} />
-              <span>Docs</span>
-            </a>
-          </div>
+        <div className="flex items-center gap-4">
+          <a
+            href="https://github.com/picahq/pica"
+            target="_blank"
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
+          >
+            <GitHubIcon size={18} />
+            <span className="hidden sm:inline">picahq/pica</span>
+          </a>
+          <a
+            href="https://docs.picaos.com/sdk/vercel-ai"
+            target="_blank"
+            className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors text-sm bg-emerald-950/40 px-3 py-1.5 rounded-lg border border-emerald-800/40 hover:border-emerald-700/40"
+          >
+            <HelpIcon size={16} />
+            <span>Docs</span>
+          </a>
         </div>
       </div>
-      <div className="max-w-[800px] mx-auto w-full mt-4">
-        <div className="h-px w-full bg-green-800/20" />
-        <div className="flex items-center justify-between mt-3 px-1">
+      
+      <div className="max-w-3xl mx-auto w-full mt-6">
+        <div className="h-px w-full bg-white/10" />
+        <div className="flex items-center justify-between mt-4 px-1">
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">Join our community of</span>
+            <span className="text-sm text-gray-400">Join our community of</span>
             <a
               href="https://www.picaos.com/community"
               target="_blank"
-              className="text-xs font-medium text-green-500 hover:underline"
+              className="text-sm font-medium text-emerald-500 hover:text-emerald-400 transition-colors"
             >
               passionate developers
             </a>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">Used with</span>
+            <span className="text-sm text-gray-400">Powered by</span>
             <a
               href="https://sdk.vercel.ai"
               target="_blank"
-              className="flex items-center gap-1.5 text-gray-400 hover:text-green-500 transition-colors"
+              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
             >
-              <VercelIcon size={13} />
-              <span className="text-xs">AI SDK</span>
+              <VercelIcon size={14} />
+              <span className="text-sm">AI SDK</span>
             </a>
           </div>
         </div>
