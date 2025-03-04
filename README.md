@@ -14,14 +14,14 @@ FlowPilot is an AI-driven automation platform that enables users to integrate an
 ## Installation
 ### Prerequisites
 - Node.js (v16+ recommended)
-- n8n (Self-hosted or cloud version)
+- Workflow automation platform
 - PostgreSQL (for memory storage)
 - API keys for ElevenLabs, Pica, Fal.ai, and Stripe
 
 ### Setup
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/flowpilot.git
+   git clone https://github.com/sahalhes/flowpilot.git
    cd flowpilot
    ```
 2. Install dependencies:
@@ -62,6 +62,3 @@ FlowPilot is an AI-driven automation platform that enables users to integrate an
 
 ## License
 This project is licensed under the MIT License.
-
-## Contact
-For support or inquiries, reach out to **your.email@example.com** or create an issue on GitHub.
