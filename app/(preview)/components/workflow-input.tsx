@@ -1,12 +1,23 @@
 import { useState, useRef, useEffect } from "react";
 import { ChatInput } from "./ChatInput";
 import { ChatMessages } from "./ChatMessages";
+import { toast } from "sonner";
 
 export default function WorkflowChat() {
-  const [messages, setMessages] = useState<{ id: string; role: "user" | "assistant" | "data" | "system"; content: string }[]>([]);
+  const [messages, setMessages] = useState<{ 
+    id: string; 
+    role: "user" | "assistant" | "data" | "system"; 
+    content: string 
+  }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Get config from localStorage
+  const getConfig = () => {
+    const savedConfig = localStorage.getItem('flowpilot-config');
+    return savedConfig ? JSON.parse(savedConfig) : null;
+  };
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -26,9 +37,12 @@ export default function WorkflowChat() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const workflowUrl = process.env.NEXT_PUBLIC_WORKFLOW_URL;
+    // Get workflow URL from localStorage
+    const config = getConfig();
+    const workflowUrl = config?.workflowUrl;
+
     if (!workflowUrl) {
-      console.error("Workflow URL environment variable is not set");
+      toast.error("Please configure the Workflow URL in Settings");
       return;
     }
     
@@ -46,7 +60,13 @@ export default function WorkflowChat() {
     try {
       const res = await fetch(workflowUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          // Add secret key if available
+          ...(config.picaSecretKey && { 
+            'Authorization': `Bearer ${config.picaSecretKey}` 
+          })
+        },
         body: JSON.stringify({ message: input }),
       });
 
@@ -70,6 +90,9 @@ export default function WorkflowChat() {
         content: `Error connecting to workflow: ${(error as Error).message}`
       };
       setMessages(prev => [...prev, errorMessage]);
+      
+      // Show error toast
+      toast.error("Failed to connect to workflow. Check your settings.");
     } finally {
       setIsLoading(false);
     }
