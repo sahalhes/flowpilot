@@ -5,11 +5,7 @@ FlowPilot is an AI-driven automation platform that enables users to integrate an
 ## Features
 - **Custom AI Agents**: Use Pica or integrate your own AI agents.
 - **Voice Interaction**: ElevenLabs-powered voice responses.
-- **Automated Error Resolution**: AI-driven troubleshooting.
-- **n8n Integration**: Process data and automate workflows.
-- **Web Parsing & Summarization**: Extract, summarize, and analyze web content.
-- **Fal.ai Image Generation**: Create AI-generated images and store them in Google Drive.
-- **Stripe Integration**: Automate server creation upon payment.
+
 
 ## Installation
 ### Prerequisites
@@ -39,9 +35,7 @@ FlowPilot is an AI-driven automation platform that enables users to integrate an
 
 ## Usage
 - **AI Chatbot**: Interact with the AI through the web UI.
-- **URL Helper**: Send URLs for summarization, memory tricks, or quizzes.
-- **Image Generation**: Request AI-generated images via Fal.ai.
-- **Automation**: Utilize n8n workflows for advanced automation.
+- **Automation**: Utilize custom workflows for advanced automation.
 
 ## Contribution
 1. Fork the repository.
