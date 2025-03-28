@@ -13,7 +13,7 @@ import ChatInterface from "./components/workflow-input";
 
 export default function Home() {
   const [mode, setMode] = useState<"execute" | "workflow">("execute");
-
+  const agentID=process.env.ELEVENLABS_AGENT_ID as string;
   const { open } = useAuthKit({
     token: {
       url: "http://localhost:3000/api/authkit",
@@ -66,7 +66,7 @@ export default function Home() {
           <ChatInterface />
         )}
       </div>
-      <elevenlabs-convai agent-id="WR8FJywOWW2B9SK3HeCg"></elevenlabs-convai><script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+      <elevenlabs-convai agent-id={agentID} ></elevenlabs-convai><script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
     </div>
   );
 }

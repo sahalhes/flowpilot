@@ -15,8 +15,7 @@ FlowPilot is an AI-driven automation platform that enables users to integrate an
 ### Prerequisites
 - Node.js (v16+ recommended)
 - Workflow automation platform
-- PostgreSQL (for memory storage)
-- API keys for ElevenLabs, Pica, Fal.ai, and Stripe
+- API keys for PicaOs , custom workflow url
 
 ### Setup
 1. Clone the repository:

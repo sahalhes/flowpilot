@@ -55,10 +55,15 @@ export default function WorkflowChat() {
       }
 
       const data = await res.json();
+      
+      // Log the entire response to understand its structure
+      console.log("Full response data:", data);
+
+      // Modify the way you extract the output
       const assistantMessage: { id: string; role: "user" | "assistant" | "data" | "system"; content: string } = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: data.length > 0 && data[0].output ? data[0].output : "No valid response received."
+        content: data.output || data[0]?.output || JSON.stringify(data) || "No valid response received."
       };
 
       setMessages(prev => [...prev, assistantMessage]);
