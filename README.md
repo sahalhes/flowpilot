@@ -2,6 +2,11 @@
 
 FlowPilot is an AI-driven automation platform that enables users to integrate and control Pica connections and custom agents seamlessly. It supports ElevenLabs voice agents and works with Pica and also with custom workflow to provide intelligent automation solutions.
 
+
+https://github.com/user-attachments/assets/32bf558f-70fb-4cca-a232-90e906a93444
+
+
+
 ![Logo](public/flowpilot.png)
 
 ## Features
